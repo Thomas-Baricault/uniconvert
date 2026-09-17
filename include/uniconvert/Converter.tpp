@@ -31,22 +31,6 @@ namespace tbaricault::uniconvert
         throw std::invalid_argument("unsupported conversion");
     }
 
-    bool Converter<std::string, bool>::operator()(const std::string& value) const
-    {
-        if (value == "0" || value == "false")
-            return (false);
-        if (value == "1" || value == "true")
-            return (true);
-        throw std::invalid_argument("convertion failed");
-    }
-
-    char Converter<std::string, char>::operator()(const std::string& value) const
-    {
-        if (value.length() == 1)
-            return (value.front());
-        throw std::invalid_argument("convertion failed");
-    }
-
     template<concepts::BasicIntegralType T>
     T Converter<std::string, T>::operator()(const std::string& value, int base) const
     {
