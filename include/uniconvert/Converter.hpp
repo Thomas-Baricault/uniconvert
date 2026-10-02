@@ -10,8 +10,6 @@
 
 #include <string>
 
-#include "concepts.hpp"
-
 
 namespace tbaricault::uniconvert
 {
@@ -41,8 +39,6 @@ namespace tbaricault::uniconvert
 
     /**
      * @brief Utils class to convert a string to boolean
-     * 
-     * @tparam T Destination type
      */
     template<>
     struct Converter<std::string, bool>
@@ -63,8 +59,6 @@ namespace tbaricault::uniconvert
 
     /**
      * @brief Utils class to convert a string to char
-     * 
-     * @tparam T Destination type
      */
     template<>
     struct Converter<std::string, char>
@@ -84,16 +78,14 @@ namespace tbaricault::uniconvert
     };
 
     /**
-     * @brief Utils class to convert a string to basic integral type
-     * 
-     * @tparam T Destination type
+     * @brief Utils class to convert a string to an integer
      */
-    template<concepts::BasicIntegralType T>
-    struct Converter<std::string, T>
+    template<>
+    struct Converter<std::string, int>
     {
 
         /**
-         * @brief Converts a value from a string to basic integral type
+         * @brief Converts a value from a string to an integer
          * 
          * @param value Value to convert
          * @param base Number base used
@@ -102,21 +94,103 @@ namespace tbaricault::uniconvert
          * 
          * @throws std::invalid_argument If convertion failed
          */
-        T operator()(const std::string& value, int base = 10) const;
+        int operator()(const std::string& value, int base = 10) const;
 
     };
 
     /**
-     * @brief Utils class to convert a string to basic floating point type
-     * 
-     * @tparam T Destination type
+     * @brief Utils class to convert a string to a long integer
      */
-    template<concepts::BasicFloatingPointType T>
-    struct Converter<std::string, T>
+    template<>
+    struct Converter<std::string, long>
     {
 
         /**
-         * @brief Converts a value from a string to basic floating point type
+         * @brief Converts a value from a string to a long integer
+         * 
+         * @param value Value to convert
+         * @param base Number base used
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        long operator()(const std::string& value, int base = 10) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a string to a long long integer
+     */
+    template<>
+    struct Converter<std::string, long long>
+    {
+
+        /**
+         * @brief Converts a value from a string to a long long integer
+         * 
+         * @param value Value to convert
+         * @param base Number base used
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        long long operator()(const std::string& value, int base = 10) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a string to an unsigned long integer
+     */
+    template<>
+    struct Converter<std::string, unsigned long>
+    {
+
+        /**
+         * @brief Converts a value from a string to an unsigned long integer
+         * 
+         * @param value Value to convert
+         * @param base Number base used
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        unsigned long operator()(const std::string& value, int base = 10) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a string to an unsigned long long integer
+     */
+    template<>
+    struct Converter<std::string, unsigned long long>
+    {
+
+        /**
+         * @brief Converts a value from a string to an unsigned long long integer
+         * 
+         * @param value Value to convert
+         * @param base Number base used
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        unsigned long long operator()(const std::string& value, int base = 10) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a string to a float
+     */
+    template<>
+    struct Converter<std::string, float>
+    {
+
+        /**
+         * @brief Converts a value from a string to a float
          * 
          * @param value Value to convert
          * 
@@ -124,21 +198,19 @@ namespace tbaricault::uniconvert
          * 
          * @throws std::invalid_argument If convertion failed
          */
-        T operator()(const std::string& value) const;
+        float operator()(const std::string& value) const;
 
     };
 
     /**
-     * @brief Utils class to convert a basic type to string
-     * 
-     * @tparam T Source type
+     * @brief Utils class to convert a string to a double
      */
-    template<concepts::BasicType T>
-    struct Converter<T, std::string>
+    template<>
+    struct Converter<std::string, double>
     {
 
         /**
-         * @brief Converts a value from a basic type to string
+         * @brief Converts a value from a string to a double
          * 
          * @param value Value to convert
          * 
@@ -146,7 +218,227 @@ namespace tbaricault::uniconvert
          * 
          * @throws std::invalid_argument If convertion failed
          */
-        std::string operator()(const T& value) const;
+        double operator()(const std::string& value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a string to a long double
+     */
+    template<>
+    struct Converter<std::string, long double>
+    {
+
+        /**
+         * @brief Converts a value from a string to a long double
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        long double operator()(const std::string& value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a boolean to string
+     */
+    template<>
+    struct Converter<bool, std::string>
+    {
+
+        /**
+         * @brief Converts a value from a boolean to string
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        std::string operator()(bool value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a char to string
+     */
+    template<>
+    struct Converter<char, std::string>
+    {
+
+        /**
+         * @brief Converts a value from a char to string
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        std::string operator()(char value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert an integer to string
+     */
+    template<>
+    struct Converter<int, std::string>
+    {
+
+        /**
+         * @brief Converts a value from an integer to string
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        std::string operator()(int value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a long integer to string
+     */
+    template<>
+    struct Converter<long, std::string>
+    {
+
+        /**
+         * @brief Converts a value from a long integer to string
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        std::string operator()(long value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a long long integer to string
+     */
+    template<>
+    struct Converter<long long, std::string>
+    {
+
+        /**
+         * @brief Converts a value from a long long integer to string
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        std::string operator()(long long value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert an unsigned long integer to string
+     */
+    template<>
+    struct Converter<unsigned long, std::string>
+    {
+
+        /**
+         * @brief Converts a value from an unsigned long integer to string
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        std::string operator()(unsigned long value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert an unsigned long long integer to string
+     */
+    template<>
+    struct Converter<unsigned long long, std::string>
+    {
+
+        /**
+         * @brief Converts a value from an unsigned long long integer to string
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        std::string operator()(unsigned long long value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a float to string
+     */
+    template<>
+    struct Converter<float, std::string>
+    {
+
+        /**
+         * @brief Converts a value from a float to string
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        std::string operator()(float value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a double to string
+     */
+    template<>
+    struct Converter<double, std::string>
+    {
+
+        /**
+         * @brief Converts a value from a double to string
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        std::string operator()(double value) const;
+
+    };
+
+    /**
+     * @brief Utils class to convert a long double to string
+     */
+    template<>
+    struct Converter<long double, std::string>
+    {
+
+        /**
+         * @brief Converts a value from a long double to string
+         * 
+         * @param value Value to convert
+         * 
+         * @return Converted value
+         * 
+         * @throws std::invalid_argument If convertion failed
+         */
+        std::string operator()(long double value) const;
 
     };
 
