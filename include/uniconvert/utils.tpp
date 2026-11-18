@@ -18,9 +18,9 @@ namespace tbaricault::uniconvert
     U convert(const T& value, Args&&... args)
     {
         if constexpr (std::is_same_v<T, U>)
-            return (value);
+            return value;
         else
-            return (Converter<std::decay_t<T>, U>{}(value, std::forward<Args>(args)...));
+            return Converter<std::decay_t<T>, U>{}(value, std::forward<Args>(args)...);
     }
 
 }
